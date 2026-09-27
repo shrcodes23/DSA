@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile and Run C++ silently",
+            "type": "shell",
+            "command": "cmd.exe",
+            "args": [
+                "/c",
+                "g++ -std=c++17 \"${file}\" -o \"${fileDirname}\\${fileBasenameNoExtension}\" && \"${fileDirname}\\${fileBasenameNoExtension}\" < \"${fileDirname}\\Input.txt\" > \"${fileDirname}\\Output.txt\""
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared",
+                "echo": false,
+                "focus": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
