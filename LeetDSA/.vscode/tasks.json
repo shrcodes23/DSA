@@ -2,12 +2,13 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Compile and Run C++ silently",
-            "type": "shell",
-            "command": "cmd.exe",
+            "label": "C++ Run",
+            "type": "process",
+            "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
             "args": [
-                "/c",
-                "g++ -std=c++17 \"${file}\" -o \"${fileDirname}\\${fileBasenameNoExtension}\" && \"${fileDirname}\\${fileBasenameNoExtension}\" < \"${fileDirname}\\Input.txt\" > \"${fileDirname}\\Output.txt\""
+                "-NoProfile",
+                "-Command",
+                "Set-Location -LiteralPath \"${fileDirname}\"; & \"C:\\msys64\\ucrt64\\bin\\g++.exe\" -std=c++17 \"${fileBasename}\" -o \"${fileBasenameNoExtension}.exe\"; if ($LASTEXITCODE -eq 0) { Get-Content \"..\\Input.txt\" | & \".\\${fileBasenameNoExtension}.exe\" | Set-Content \"..\\Output.txt\" }"
             ],
             "group": {
                 "kind": "build",
