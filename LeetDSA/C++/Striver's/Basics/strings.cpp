@@ -17,15 +17,47 @@ public:
 
     }
     bool  palindromeCheck(string &s){
-        string cleaned="";
-        for(char ch:s){
-            if(isAlphaNumeric(ch)){
-                cleaned+=toLowerChar(ch);
+        // string cleaned="";
+        // for(char ch:s){
+        //     if(isAlphaNumeric(ch)){
+        //         cleaned+=toLowerChar(ch);
+        //     }
+        // }
+        // // Brute-
+        // // string reversed=cleaned;
+        // // reverse(reversed.begin(),reversed.end());
+        // // return cleaned==reversed;
+        // // Better-
+        int n=s.size();
+        int left=0;
+        int right=n-1;
+        // while(left<right){
+        //     if(cleaned[left]!=cleaned[right]){
+        //         return false;
+        //     }
+        //     left++;
+        //     right--;
+        // }
+        // return true;
+        // Optimized-
+        while(left<right){
+            while(left<right && !isAlphaNumeric(s[left])){
+                left++;
+
             }
+            while(left<right && !isAlphaNumeric(s[right])){
+                right--;
+
+            }
+            if(toLowerChar(s[left])!=toLowerChar(s[right])){
+                return false;
+
+            }
+            left++;
+            right--;
         }
-        string reversed=cleaned;
-        reverse(reversed.begin(),reversed.end());
-        return cleaned==reversed;
+        return true;
+
     }
 
 };
