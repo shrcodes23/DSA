@@ -48,10 +48,86 @@ int Search(Node*head, int val){
     return 0;
 
 }
+
+
+Node* deleteHead(Node* head){
+    if(head==nullptr) return nullptr;
+    Node* temp=head;
+    head=head->next;
+    delete temp;
+    return head;
+}
+void print(Node* head){
+    while(head!=nullptr){
+        cout<<head->data<<" ";
+        head=head->next;
+    }
+
+}
+Node* deleteTail(Node* head){
+    if(head==nullptr || head->next==nullptr) return nullptr;
+    Node* temp=head;
+    while(temp->next->next!=nullptr){
+        temp=temp->next;
+    }
+    delete(temp->next);
+    temp->next=nullptr;
+    return head;
+}
+Node* removeK(Node* head, int k){
+    if(head==nullptr) return head;
+    if(k==1){
+        Node* temp=head;
+        head=head->next;
+        free(temp);
+        return head;
+    }
+    int cnt=0;
+    Node* prev=nullptr;
+    Node* temp=head;
+    while(temp!=nullptr){
+        cnt++;
+        if(cnt==k){
+            prev->next=prev->next->next;
+            free(temp);
+            break;
+        }
+        prev=temp;
+        temp=temp->next;
+    }
+    return head;
+
+}
+Node* removeEl(Node* head, int el){
+    if(head==nullptr) return head;
+    if(head->data==el){
+        Node* temp=head;
+        head=head->next;
+        free(temp);
+        return head;
+    }
+    Node* prev=nullptr;
+    Node* temp=head;
+    while(temp!=nullptr){
+        if(temp->data==el){
+            prev->next=prev->next->next;
+            free(temp);
+            break;
+        }
+        prev=temp;
+        temp=temp->next;
+    }
+    return head;
+
+
+}
 int main(){
     vector<int> arr={2, 5 ,8 ,10};
+    int el;
+    cin>>el;
     Node* head=convertArr2List(arr);
-    cout<<Search(head, 2);
+    head=removeEl(head,5);
+    print(head);
 
 }
 // T(n)=> O(n)
