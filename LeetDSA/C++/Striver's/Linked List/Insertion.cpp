@@ -24,12 +24,12 @@ Node* Arr2List(vector <int> &arr){
     }
     return head;
 }
-Node* InsertionInHead(int el, Node* head){
+Node* InsertionAtHead(int el, Node* head){
     return new Node(el, head);
 
 
 }
-Node* InsertionInTail(int el, Node* head){
+Node* InsertionAtTail(int el, Node* head){
     if(head==nullptr){
         return new Node(el);
     }
@@ -40,9 +40,35 @@ Node* InsertionInTail(int el, Node* head){
     Node* newNode=new Node(el);
     temp->next=newNode;
     return head;
-
-
 }
+Node* InsertionAtK(int el, Node* head, int k) {
+
+    if(k == 1) {
+        return new Node(el, head);
+    }
+
+    if(head == nullptr) {
+        return nullptr;
+    }
+
+    Node* temp = head;
+    int cnt = 1;
+
+    while(temp != nullptr) {
+
+        if(cnt == k-1) {
+            Node* n = new Node(el, temp->next);
+            temp->next = n;
+            return head;
+        }
+
+        temp = temp->next;
+        cnt++;
+    }
+
+    return head;
+}
+
 void print(Node* head){
     while(head!=nullptr){
         cout<<head->data<<" ";
@@ -50,12 +76,15 @@ void print(Node* head){
     }
 
 }
-int main(){
-    vector <int> arr={2,3,4,5};
-    int el;
-    cin>>el;
-    Node* head=Arr2List(arr);
-    head=InsertionInHead(100, head);
-    print(head);
+int main() {
+    vector<int> arr = {2,3,4,5};
 
+    int el, k;
+    cin >> el >> k;
+
+    Node* head = Arr2List(arr);
+
+    head = InsertionAtK(el, head, k);
+
+    print(head);
 }
